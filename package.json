@@ -9,6 +9,11 @@
   },
   "dependencies": {
     "antd": "^4.18.7",
+    "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
+    "iron-session": "^6.0.5",
+    "js-base64": "^3.7.7",
+    "md5": "^2.3.0",
     "mockjs": "^1.1.0",
     "next": "12.0.10",
     "react": "17.0.2",
@@ -16,6 +21,7 @@
     "sass": "^1.83.0"
   },
   "devDependencies": {
+    "@types/md5": "^2.3.5",
     "@types/mockjs": "^1.0.10",
     "@types/node": "17.0.17",
     "@types/react": "17.0.39",
