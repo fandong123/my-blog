@@ -32,6 +32,11 @@ const Login: NextPage<Iprops> = (props) => {
     setIsShowVerifyCode(false)
   }
 
+  const handleLogin = async () => {
+    const formValue = await form.validateFields()
+    requestInstance.post('/api/user/login', formValue)
+  }
+
   return (
     <Modal
       title="手机号登录"
@@ -65,7 +70,7 @@ const Login: NextPage<Iprops> = (props) => {
           ></Input>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" block shape="round">
+          <Button type="primary" block shape="round" onClick={handleLogin}>
             登录
           </Button>
         </Form.Item>

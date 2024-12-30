@@ -14,7 +14,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": ".",
+    "strictPropertyInitialization": false
     // "paths": {
     //   "@/components/*": ["components/*"]
     // }
