@@ -3,15 +3,18 @@ import { Form, Modal, Input, Button, message } from 'antd'
 import { useState } from 'react'
 import CutDown from '../CutDown'
 import requestInstance from 'service/fetch'
+import { useStore } from 'store'
 
 interface Iprops {
-  isShow: boolean;
-  onClose: () => void;
+  isShow: boolean
+  onClose: () => void
 }
 const Login: NextPage<Iprops> = (props) => {
   const { isShow, onClose } = props
   const [isShowVerifyCode, setIsShowVerifyCode] = useState(false)
+  const [loginLoading, setLoginLoading] = useState(false)
   const [form] = Form.useForm()
+  const store = useStore()
 
   const handleGetVerifyCode = async () => {
     // setIsShowVerifyCode(true)
@@ -34,7 +37,24 @@ const Login: NextPage<Iprops> = (props) => {
 
   const handleLogin = async () => {
     const formValue = await form.validateFields()
-    requestInstance.post('/api/user/login', formValue)
+    setLoginLoading(true)
+    try {
+      const res: any = await requestInstance.post('/api/user/login', {
+        ...formValue,
+        identity_type: 'phone',
+      })
+      console.log(res)
+      if (res?.code === 0) {
+        store.user.setUserInfo(res?.data)
+        console.log(store)
+        message.success('登录成功')
+        onClose()
+      } else {
+        message.error(res?.msg || '登录失败')
+      }
+    } finally {
+      setLoginLoading(false)
+    }
   }
 
   return (
@@ -70,7 +90,13 @@ const Login: NextPage<Iprops> = (props) => {
           ></Input>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" block shape="round" onClick={handleLogin}>
+          <Button
+            type="primary"
+            block
+            shape="round"
+            loading={loginLoading}
+            onClick={handleLogin}
+          >
             登录
           </Button>
         </Form.Item>

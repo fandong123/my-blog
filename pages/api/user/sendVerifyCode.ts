@@ -19,10 +19,10 @@ const expireTime = '5'
 async function sendVerifyCode(req: NextApiRequest, res: NextApiResponse) {
   const { to, templateId = '1' } = req.body
   const session: ISession = req.session
-  console.log(to)
-  console.log(verifyCode)
-  console.log(sigParameter)
-  console.log(authorization)
+  // console.log(to)
+  // console.log(verifyCode)
+  // console.log(sigParameter)
+  // console.log(authorization)
   const result = await requetInstance.post(
     `${host}/2013-12-26/Accounts/${accountSid}/SMS/TemplateSMS?sig=${sigParameter}`,
     {
