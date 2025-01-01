@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { navs } from './config'
 import styles from './index.module.scss'
-import { Avatar, Button, Dropdown, Menu } from 'antd'
+import { Avatar, Button, Dropdown, Menu, message } from 'antd'
 import { useState } from 'react'
 import Login from '../Login'
 import { useStore } from 'store'
@@ -12,12 +12,18 @@ import { HomeOutlined, LoginOutlined } from '@ant-design/icons'
 import requetInstance from 'service/fetch'
 
 const NavBar: NextPage = () => {
-  const { pathname } = useRouter()
+  const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)
   const store = useStore()
   const { userId, avatar } = store.user.userInfo
 
-  const handleGotoEditorPage = () => {}
+  const handleGotoEditorPage = () => {
+    if (userId) {
+      push('/editor/new')
+    } else {
+      message.error('请先登录')
+    }
+  }
   const handleLogin = () => {
     setIsShowLogin(true)
   }

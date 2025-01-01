@@ -14,7 +14,7 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
   const db = await prepareConnection()
   const userAuthRepo = db.getRepository(UserAuth)
   console.log('session:', session)
-  if (verifyCode === String(session.verifyCode || 3047)) {
+  if (verifyCode === String(session.verifyCode)) {
     const userAuth = await userAuthRepo.findOne(
       {
         identity_type,

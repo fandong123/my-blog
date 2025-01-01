@@ -10,18 +10,27 @@ interface IMyAppProps {
   pageProps: any
 }
 
+const renderLayout = (Component: NextPage, pageProps: any) => {
+  if (Component.layout === null) {
+    return <Component {...pageProps} />
+  }
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
+}
+
 function MyApp({ initialValue, Component, pageProps }: IMyAppProps) {
   return (
     <StoreProvider initialValue={initialValue}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {renderLayout(Component, pageProps)}
     </StoreProvider>
   )
 }
 
 MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
-  const { userId, nickname, avatar } = ctx?.req.cookies || {}
+  const { userId, nickname, avatar } = ctx?.req?.cookies || {}
   return {
     initialValue: {
       user: {
