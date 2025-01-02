@@ -31,7 +31,6 @@ export async function getServerSideProps({ params }: any) {
     //   views: article.views + 1
     // })
   }
-  console.log('article-end:', article?.views)
   return { props: { article: JSON.parse(JSON.stringify(article)) } }
 }
 
@@ -41,7 +40,6 @@ const ArticleDetail: NextPage<IArticleProps> = (props) => {
   const loginUserInfo = store?.user?.userInfo
   const { user } = article || {}
   const { id, nickname, avatar } = user || {}
-  console.log('article:', article)
   return (
     <div>
       <div className="content-layout">

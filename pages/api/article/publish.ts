@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { Cookie } from 'next-cookie'
-import { setCookie } from 'utils'
 import { ironOptions } from 'config'
 import { prepareConnection } from 'db'
 import { ISession } from '..'

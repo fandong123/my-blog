@@ -5,6 +5,7 @@ import { IArticle } from 'pages/api/index'
 import ListItem from 'components/ListItem'
 import { Divider } from 'antd'
 import { Fragment } from 'react'
+import { observer } from 'mobx-react-lite'
 
 interface IHomeProps {
   articles: IArticle[]
@@ -36,4 +37,4 @@ const Home: NextPage<IHomeProps> = (props) => {
   )
 }
 
-export default Home
+export default observer(Home)
