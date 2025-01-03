@@ -5,8 +5,10 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm'
 import { User } from './user'
+import { Comments } from './comments'
 
 @Entity({ name: 'articles' })
 export class Article extends BaseEntity {
@@ -36,4 +38,8 @@ export class Article extends BaseEntity {
   })
   @JoinColumn({ name: 'user_id' })
   user!: User
+
+  @OneToMany(() => Comments, (comments) => comments.article)
+  @JoinColumn({ name: 'id' })
+  comments!: Comments[]
 }
