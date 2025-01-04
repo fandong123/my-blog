@@ -37,7 +37,6 @@ const NavBar: NextPage = () => {
     const res: any = await requetInstance.post('/api/user/logout')
     if (res?.code === 0) {
       store.user.setUserInfo({})
-      console.log('store', store.user)
     }
   }
 

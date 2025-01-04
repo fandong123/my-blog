@@ -10,6 +10,7 @@ import { Article } from 'db/entity'
 import { IArticle } from 'pages/api'
 import styles from './index.module.scss'
 import { useState } from 'react'
+import * as ANTD_ICONS from '@ant-design/icons'
 import requetInstance from 'service/fetch'
 
 interface IArticleProps {
@@ -23,9 +24,8 @@ export async function getServerSideProps({ params }: any) {
     where: {
       id: params?.id,
     },
-    relations: ['user', 'comments', 'comments.user'],
+    relations: ['user', 'comments', 'comments.user', 'tags'],
   })
-  console.log('article-start:', article?.views)
   if (article) {
     article.views = article?.views + 1
     await articleRepo.save(article)
@@ -44,7 +44,6 @@ const ArticleDetail: NextPage<IArticleProps> = (props) => {
   const loginUserInfo = store?.user?.userInfo
   const { user } = article || {}
   const { id, nickname, avatar } = user || {}
-  console.log('article:', article)
   const handleComment = async () => {
     if (!inputVal) {
       message.error('请输入评论内容')
@@ -70,6 +69,15 @@ const ArticleDetail: NextPage<IArticleProps> = (props) => {
           <Avatar src={avatar} size={50} />
           <div className={styles.info}>
             <div className={styles.name}>{nickname}</div>
+            <div>
+              {article?.tags?.map((tag) => {
+                return (
+                  <span key={tag?.id}>
+                    {(ANTD_ICONS as any)[tag?.icon]?.render()}
+                  </span>
+                )
+              })}
+            </div>
             <div className={styles.date}>
               <div>
                 {format(new Date(article?.update_time), 'yyyy-MM-dd hh:mm:ss')}

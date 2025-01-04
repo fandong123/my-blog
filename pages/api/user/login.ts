@@ -13,7 +13,6 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
 
   const db = await prepareConnection()
   const userAuthRepo = db.getRepository(UserAuth)
-  console.log('session:', session)
   if (verifyCode === String(session.verifyCode || 1111)) {
     const userAuth = await userAuthRepo.findOne(
       {
@@ -69,7 +68,6 @@ async function login(req: NextApiRequest, res: NextApiResponse) {
           avatar,
         }
       })
-      console.log('resUserAuth:', resUserAuth)
     }
   } else {
     res.status(200).json({

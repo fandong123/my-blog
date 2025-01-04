@@ -6,9 +6,11 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  ManyToMany,
 } from 'typeorm'
 import { User } from './user'
 import { Comments } from './comments'
+import  { Tag } from './tag'
 
 @Entity({ name: 'articles' })
 export class Article extends BaseEntity {
@@ -32,6 +34,11 @@ export class Article extends BaseEntity {
 
   @Column()
   is_delete!: number
+
+  @ManyToMany(() => Tag, (tag) => tag.articles, {
+    cascade: true,
+  })
+  tags!: Tag[]
 
   @ManyToOne(() => User, {
     cascade: true,

@@ -8,7 +8,6 @@ import { User, Article, Comments } from 'db/entity'
 async function publish(req: NextApiRequest, res: NextApiResponse) {
   const session = req.session as ISession
   const { content, article_id } = req.body
-  console.log('req.body:', req.body)
   const db = await prepareConnection()
   const commentRepo = db.getRepository(Comments);
   const user = await db.getRepository(User).findOne({

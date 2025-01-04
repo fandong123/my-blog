@@ -14,15 +14,13 @@ interface IHomeProps {
 export async function getServerSideProps() {
   const db = await prepareConnection()
   const articles = await db.getRepository(Article).find({
-    relations: ['user'],
+    relations: ['user', 'tags'],
   })
-  console.log('articles:', JSON.parse(JSON.stringify(articles)))
   return { props: { articles: JSON.parse(JSON.stringify(articles)) } }
 }
 
 const Home: NextPage<IHomeProps> = (props) => {
   const { articles } = props
-  console.log('articles:', articles)
   return (
     <div className="content-layout">
       {articles.map((article) => {

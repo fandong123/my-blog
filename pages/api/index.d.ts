@@ -17,7 +17,8 @@ export type IArticle = {
   create_time: Date
   update_time: Date
   user: IUserInfo
-  comments: IComment[]
+  comments: IComment[],
+  tags: Record<string, any>[]
 }
 
 export type ISession = IronSession & Record<string, any>

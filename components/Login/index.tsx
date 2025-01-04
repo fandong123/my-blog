@@ -43,10 +43,8 @@ const Login: NextPage<Iprops> = (props) => {
         ...formValue,
         identity_type: 'phone',
       })
-      console.log(res)
       if (res?.code === 0) {
         store.user.setUserInfo(res?.data)
-        console.log(store)
         message.success('登录成功')
         onClose()
       } else {
