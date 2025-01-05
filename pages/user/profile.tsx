@@ -16,7 +16,7 @@ const tailLayout = {
 
 const UserProfile = () => {
   const [form] = Form.useForm()
-  const userInfoRef = useRef(null)
+  const userInfoRef = useRef<any>(null)
   const { push } = useRouter()
 
   useEffect(() => {

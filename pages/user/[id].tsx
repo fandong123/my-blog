@@ -40,7 +40,6 @@ const Index: NextPage<{ userInfo: any; articles: IArticle[] }> = (props) => {
     pre += cur?.views
     return pre
   }, 0)
-  console.log('props', props)
   return (
     <div className={styles.userDetail}>
       <div className={styles.left}>

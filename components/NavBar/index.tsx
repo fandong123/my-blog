@@ -57,7 +57,7 @@ const NavBar: NextPage = () => {
 
   return (
     <div className={styles.navbar}>
-      <section className={styles.logoArea}>BLOG-C</section>
+      <section className={styles.logoArea}>BLOG-科长牛B</section>
       <section className={styles.linkArea}>
         {navs.map((nav) => (
           <Link key={nav.value} href={nav.value}>

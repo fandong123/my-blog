@@ -11,7 +11,7 @@ interface IMyAppProps {
 }
 
 const renderLayout = (Component: NextPage, pageProps: any) => {
-  if (Component.layout === null) {
+  if ((Component as any).layout === null) {
     return <Component {...pageProps} />
   }
   return (
