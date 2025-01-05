@@ -88,6 +88,6 @@ const NewEditor = () => {
   )
 }
 
-NewEditor.layout = null
+(NewEditor as any).layout = null
 
 export default observer(NewEditor)
