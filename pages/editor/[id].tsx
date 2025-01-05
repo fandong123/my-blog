@@ -104,6 +104,6 @@ const UpdateEditor = ({ article }: IUpdateEditorProps) => {
   )
 }
 
-UpdateEditor.layout = null
+(UpdateEditor as any).layout = null
 
 export default observer(UpdateEditor)
