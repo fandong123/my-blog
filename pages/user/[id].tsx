@@ -8,7 +8,20 @@ import Link from 'next/link'
 import ListItem from 'components/ListItem'
 import { IArticle } from 'pages/api'
 
-export async function getServerSideProps({ params }: any) {
+export async function getStaticPaths() {
+  const db = await prepareConnection()
+  const userRepo = db.getRepository(User)
+  const users = await userRepo.find()
+  const userIds = users?.map((user) => ({
+    params: { id: String(user?.id) },
+  }))
+  return {
+    paths: userIds,
+    fallback: 'blocking',
+  }
+}
+
+export async function getStaticProps({ params }: any) {
   const db = await prepareConnection()
   const userRepo = db.getRepository(User)
   const articleRepo = db.getRepository(Article)
@@ -33,6 +46,32 @@ export async function getServerSideProps({ params }: any) {
     },
   }
 }
+
+// export async function getServerSideProps({ params }: any) {
+//   const db = await prepareConnection()
+//   const userRepo = db.getRepository(User)
+//   const articleRepo = db.getRepository(Article)
+//   const userInfo = await userRepo.findOne({
+//     where: {
+//       id: Number(params?.id),
+//     },
+//   })
+//   const articles = await articleRepo.find({
+//     relations: ['user', 'tags'],
+//     where: {
+//       user: {
+//         id: Number(params?.id),
+//       },
+//     },
+//   })
+
+//   return {
+//     props: {
+//       userInfo: JSON.parse(JSON.stringify(userInfo || {})),
+//       articles: JSON.parse(JSON.stringify(articles || {})),
+//     },
+//   }
+// }
 
 const Index: NextPage<{ userInfo: any; articles: IArticle[] }> = (props) => {
   const { userInfo = {}, articles = [] } = props
