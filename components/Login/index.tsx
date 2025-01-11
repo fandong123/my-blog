@@ -9,12 +9,21 @@ interface Iprops {
   isShow: boolean
   onClose: () => void
 }
+
+const client_id = 'Ov23libS9zRJsYrRajAI'
+
 const Login: NextPage<Iprops> = (props) => {
   const { isShow, onClose } = props
   const [isShowVerifyCode, setIsShowVerifyCode] = useState(false)
   const [loginLoading, setLoginLoading] = useState(false)
   const [form] = Form.useForm()
   const store = useStore()
+
+  const handleGitHubLogin = () => {
+    window.open(
+      `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:3000/api/oauth/redirect`
+    )
+  }
 
   const handleGetVerifyCode = async () => {
     // setIsShowVerifyCode(true)
@@ -101,7 +110,7 @@ const Login: NextPage<Iprops> = (props) => {
       </Form>
       <div>
         <div>
-          <a>使用 Github 登录</a>
+          <a onClick={handleGitHubLogin}>使用 Github 登录</a>
         </div>
         <div>
           注册登录即表示同意<a>隐私政策</a>

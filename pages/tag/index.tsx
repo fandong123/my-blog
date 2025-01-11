@@ -67,6 +67,7 @@ const Tag: NextPage<TagProps> = () => {
   }
 
   useEffect(() => {
+    // throw new Error('取消关注')
     getTagsAndFollowCounts()
   }, [])
 
